@@ -297,9 +297,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   dashDuration: 0.4
-  dashTime: 0
   dashSpeed: 25
   dashCooldown: 1.5
+  comboTime: 1
 --- !u!70 &1001914704
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 1016895855}
   - component: {fileID: 1016895856}
   - component: {fileID: 1016895857}
+  - component: {fileID: 1016895858}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -441,6 +442,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1016895858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016895854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da33a5ac11de2d44ca95763a8c94fc5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2137695596
 GameObject:
   m_ObjectHideFlags: 0
