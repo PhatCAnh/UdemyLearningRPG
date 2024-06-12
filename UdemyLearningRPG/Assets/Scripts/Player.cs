@@ -14,6 +14,12 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround;
     private bool isGrounded;
 
+    [Header("Dash Ability Info")]
+    [SerializeField] private float dashDuration; 
+    private float dashTime;
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashCooldown;
+    private float dashCooldownTimer;
 
     void Start()
     {
@@ -29,6 +35,8 @@ public class Player : MonoBehaviour
         CheckInput();
 
         CollisionCheck();
+
+        dashCooldownTimer -= Time.deltaTime;
 
         FlipController();
 
@@ -48,17 +56,41 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            DashAbility();
+        }
+
+    }
+
+    private void DashAbility()
+    {
+        if(dashCooldownTimer < 0)
+        {
+            dashCooldownTimer = dashCooldown;
+            dashTime = dashDuration;
+        } 
     }
 
     private void Movement()
     {
-        rb.velocity = new Vector2(moveSpeed * xInput, rb.velocity.y);
+        if (dashTime > 0)
+        {
+            dashTime -= Time.deltaTime;
+
+            rb.velocity = new Vector2(dashSpeed * xInput, 0);
+        }
+        else
+        {
+            rb.velocity = new Vector2(moveSpeed * xInput, rb.velocity.y);
+        }
     }
 
     private void Jump()
     {
-        if(isGrounded)
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        if (isGrounded)
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
     private void Flip()
@@ -83,6 +115,7 @@ public class Player : MonoBehaviour
 
         _animator.SetBool("isMoving", isMoving);
         _animator.SetBool("isGrounded", isGrounded);
+        _animator.SetBool("isDashing", dashTime > 0);
     }
 
     private void OnDrawGizmos()

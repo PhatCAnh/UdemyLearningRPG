@@ -184,7 +184,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -296,6 +296,9 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  dashDuration: 0.4
+  dashSpeed: 25
+  dashCooldown: 1.5
 --- !u!70 &1001914704
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -516,8 +519,8 @@ Transform:
   m_GameObject: {fileID: 2137695596}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08, y: -3.72, z: 0}
-  m_LocalScale: {x: 14.68805, y: 1, z: 1}
+  m_LocalPosition: {x: -0.2302, y: -3.72, z: 0}
+  m_LocalScale: {x: 36.401783, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
