@@ -297,6 +297,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   dashDuration: 0.4
+  dashTime: 0
   dashSpeed: 25
   dashCooldown: 1.5
 --- !u!70 &1001914704

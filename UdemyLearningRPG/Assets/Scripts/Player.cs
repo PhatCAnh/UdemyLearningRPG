@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         CheckInput();
 
         CollisionCheck();
-
+        
         dashCooldownTimer -= Time.deltaTime;
 
         FlipController();
@@ -76,10 +76,10 @@ public class Player : MonoBehaviour
     private void Movement()
     {
         if (dashTime > 0)
-        {
-            dashTime -= Time.deltaTime;
-
+        {            
             rb.velocity = new Vector2(dashSpeed * xInput, 0);
+
+            dashTime -= Time.deltaTime;
         }
         else
         {
