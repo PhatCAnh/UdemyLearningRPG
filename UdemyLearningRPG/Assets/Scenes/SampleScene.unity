@@ -265,7 +265,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -290,8 +290,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1001914702}
-  moveSpeed: 5
-  jumpForce: 5
+  moveSpeed: 8
+  jumpForce: 12
+  groundCheckDistance: 1.4
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!70 &1001914704
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -444,7 +448,7 @@ GameObject:
   - component: {fileID: 2137695598}
   - component: {fileID: 2137695597}
   - component: {fileID: 2137695599}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
