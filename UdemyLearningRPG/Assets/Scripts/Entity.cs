@@ -30,7 +30,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
-        CollisionCheck();
+       // CollisionCheck();
     }
 
     protected virtual void CollisionCheck()
