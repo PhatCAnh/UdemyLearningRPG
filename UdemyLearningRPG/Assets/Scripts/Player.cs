@@ -1,19 +1,13 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
-    private Animator _animator;
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float moveSpeed, jumpForce;
 
-    private float xInput;
-    private int facingDir = 1;
-    private bool facingRight = true;
+    private float xInput;   
 
-    [Header("Collison Info")]
-    [SerializeField] private float groundCheckDistance;
-    [SerializeField] private LayerMask whatIsGround;
-    private bool isGrounded;
+    [Header("Move Info")]
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float jumpForce;
 
     [Header("Dash Ability Info")]
     [SerializeField] private float dashDuration; 
@@ -28,14 +22,14 @@ public class Player : MonoBehaviour
     private bool isAttacking;
     private int comboCounter;
 
-    void Start()
+    protected override void Start()
     {
-        _animator = GetComponentInChildren<Animator>();
+        base.Start();
     }
 
-
-    void Update()
+    protected override void Update()
     {
+        base.Update();
 
         Movement();
 
@@ -64,12 +58,7 @@ public class Player : MonoBehaviour
             comboCounter = 0;
         }
     }
-
-
-    private void CollisionCheck()
-    {
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
-    }
+   
 
     private void CheckInput()
     {
@@ -136,12 +125,7 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
-    private void Flip()
-    {
-        facingDir *= -1;
-        facingRight = !facingRight;
-        transform.Rotate(0, 180, 0);
-    }
+    
 
     private void FlipController()
     {
@@ -162,11 +146,6 @@ public class Player : MonoBehaviour
         _animator.SetBool("isDashing", dashTime > 0);
         _animator.SetBool("isAttacking", isAttacking);
         _animator.SetInteger("comboCounter", comboCounter);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - groundCheckDistance));
     }
 
 }
