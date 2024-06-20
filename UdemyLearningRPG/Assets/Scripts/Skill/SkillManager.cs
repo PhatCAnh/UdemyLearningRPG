@@ -9,6 +9,7 @@ public class SkillManager : MonoBehaviour
     public DashSkill dashSkill {  get; private set; }
     public CloneSkill cloneSkill { get; private set; }
     public SwordSkill swordSkill { get; private set; }
+    public CrystalSkill crystalSkill { get; private set; }
 
     public BlackHoleSkill blackHoleSkill { get; private set; }
 
@@ -30,6 +31,7 @@ public class SkillManager : MonoBehaviour
         cloneSkill = GetComponent<CloneSkill>();
         swordSkill = GetComponent<SwordSkill>();
         blackHoleSkill = GetComponent<BlackHoleSkill>();
+        crystalSkill = GetComponent<CrystalSkill>();
     }
 
 }
