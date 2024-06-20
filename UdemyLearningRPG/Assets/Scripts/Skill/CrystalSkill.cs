@@ -8,6 +8,9 @@ public class CrystalSkill : Skill
 
     [SerializeField] private float crystalDuration;
 
+    [Header("Crystal mirage")]
+    [SerializeField] private bool cloneInsteadOfCrystal;
+
     [Header("Explosive info")]
     [SerializeField] private bool canExplode;
 
@@ -31,10 +34,7 @@ public class CrystalSkill : Skill
 
         if (currentCrystal == null)
         {
-            currentCrystal = Instantiate(crystalPrefab, player.transform.position, Quaternion.identity);
-            CrystalSkillController currentCrystalScript = currentCrystal.GetComponent<CrystalSkillController>();
-
-            currentCrystalScript.SetUpCrystal(crystalDuration, canExplode, canMoveToEnemy, moveSpeed, FindClosestEnemy(currentCrystal.transform));
+            CreateCrystal();
         }
         else
         {
@@ -45,10 +45,29 @@ public class CrystalSkill : Skill
             player.transform.position = currentCrystal.transform.position;
             currentCrystal.transform.position = playerPos;
 
-            currentCrystal.GetComponent<CrystalSkillController>()?.FinishCrystal();
+            if (cloneInsteadOfCrystal)
+            {
+                SkillManager.instance.cloneSkill.CreateClone(currentCrystal.transform, Vector3.zero);
+                Destroy(currentCrystal);
+            }
+            else
+            {
+                currentCrystal.GetComponent<CrystalSkillController>()?.FinishCrystal();
+            }
+
         }
 
     }
+
+    public void CreateCrystal()
+    {
+        currentCrystal = Instantiate(crystalPrefab, player.transform.position, Quaternion.identity);
+        CrystalSkillController currentCrystalScript = currentCrystal.GetComponent<CrystalSkillController>();
+
+        currentCrystalScript.SetUpCrystal(crystalDuration, canExplode, canMoveToEnemy, moveSpeed, FindClosestEnemy(currentCrystal.transform));
+    }
+
+    public void CurrentCrystalChooseRandomTarget() => currentCrystal.GetComponent<CrystalSkillController>().ChooseRandomEnemy();
 
     private bool CanUseMultiCrystal()
     {
@@ -56,7 +75,7 @@ public class CrystalSkill : Skill
         {
             if (crystalLeftList.Count > 0)
             {
-                if(crystalLeftList.Count == amountOfStacks)
+                if (crystalLeftList.Count == amountOfStacks)
                 {
                     Invoke("ResetAbility", useTimeWindow);
                 }
